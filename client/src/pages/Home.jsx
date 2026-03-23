@@ -57,7 +57,7 @@ function AuthBanner({ onConnect }) {
 }
 
 // ── Main Page ─────────────────────────────────────────────────
-export default function Home({ darkMode, setDarkMode }) {
+export default function Home() {
   const [authenticated, setAuthenticated] = useState(false);
   const [clientName, setClientName]       = useState('');
   const [projectName, setProjectName]     = useState('');
@@ -141,7 +141,7 @@ export default function Home({ darkMode, setDarkMode }) {
   const showResult = !!result;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-900 to-blue-950 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-900 to-blue-950">
       {/* Background decoration */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl" />
@@ -154,8 +154,6 @@ export default function Home({ darkMode, setDarkMode }) {
         <Header
           authenticated={authenticated}
           onAuthChange={setAuthenticated}
-          darkMode={darkMode}
-          setDarkMode={setDarkMode}
         />
 
         <main className="max-w-2xl mx-auto px-6 pb-20">
