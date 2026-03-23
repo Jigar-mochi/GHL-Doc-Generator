@@ -15,7 +15,22 @@ const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
 
 // ── MIDDLEWARE ───────────────────────────────────────────────
 app.use(cors({
-  origin: CLIENT_URL,
+  origin: function (origin, callback) {
+    const allowed = [
+      process.env.CLIENT_URL,
+      'http://localhost:5173',
+      'http://localhost:3000',
+    ].filter(Boolean);
+
+    // Allow requests with no origin (mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+
+    if (allowed.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS blocked: ${origin}`));
+    }
+  },
   credentials: true,
 }));
 
